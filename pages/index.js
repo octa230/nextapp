@@ -29,10 +29,10 @@ export default function Home({ topRatedProducts }) {
     <Layout title="floralshop">
       <Carousel showThumbs={false} autoPlay className='carousel'>
         <div>
-          <img src="/images/001.jpg" />
+          <img src=''/>
         </div>
         <div>
-          <img src="/images/001.png" />
+          <img src=''/>
         </div>
       </Carousel>
       <h2 className="my-3 text-2xl">Featured Products</h2>

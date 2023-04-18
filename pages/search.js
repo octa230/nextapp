@@ -13,15 +13,15 @@ const PAGE_SIZE = 2;
 
 const prices = [
   {
-    name: '$1 to $50',
+    name: '1 to 50',
     value: '1-50',
   },
   {
-    name: '$51 to $200',
+    name: '51 to 200',
     value: '51-200',
   },
   {
-    name: '$201 to $1000',
+    name: '201 to 1000',
     value: '201-1000',
   },
 ];
@@ -34,18 +34,18 @@ export default function Search(props) {
   const {
     query = 'all',
     category = 'all',
-    brand = 'all',
+    color = 'all',
     price = 'all',
     rating = 'all',
     sort = 'featured',
     page = 1,
   } = router.query;
-  const { products, countProducts, categories, brands, pages } = props;
+  const { products, countProducts, categories, colors, pages } = props;
 
   const filterSearch = ({
     page,
     category,
-    brand,
+    color,
     sort,
     min,
     max,
@@ -59,7 +59,7 @@ export default function Search(props) {
     if (searchQuery) query.searchQuery = searchQuery;
     if (sort) query.sort = sort;
     if (category) query.category = category;
-    if (brand) query.brand = brand;
+    if (color) query.color = color;
     if (price) query.price = price;
     if (rating) query.rating = rating;
     if (min) query.min ? query.min : query.min === 0 ? 0 : min;
@@ -76,7 +76,7 @@ export default function Search(props) {
   const pageHandler = (page) => {
     filterSearch({ page });
   };
-  const brandHandler = (e) => {
+  const colorHandler = (e) => {
     filterSearch({ brand: e.target.value });
   };
   const sortHandler = (e) => {
@@ -122,13 +122,13 @@ export default function Search(props) {
             </select>
           </div>
           <div className="mb-3">
-            <h2>Brands</h2>
-            <select className="w-full" value={brand} onChange={brandHandler}>
+            <h2>Colors</h2>
+            <select className="w-full" value={color} onChange={colorHandler}>
               <option value="all">All</option>
-              {brands &&
-                brands.map((brand) => (
-                  <option key={brand} value={brand}>
-                    {brand}
+              {colors &&
+                color.map((color) => (
+                  <option key={color} value={color}>
+                    {color}
                   </option>
                 ))}
             </select>
@@ -164,13 +164,13 @@ export default function Search(props) {
               {products.length === 0 ? 'No' : countProducts} Results
               {query !== 'all' && query !== '' && ' : ' + query}
               {category !== 'all' && ' : ' + category}
-              {brand !== 'all' && ' : ' + brand}
+              {color !== 'all' && ' : ' + color}
               {price !== 'all' && ' : Price ' + price}
               {rating !== 'all' && ' : Rating ' + rating + ' & up'}
               &nbsp;
               {(query !== 'all' && query !== '') ||
               category !== 'all' ||
-              brand !== 'all' ||
+              color !== 'all' ||
               rating !== 'all' ||
               price !== 'all' ? (
                 <button onClick={() => router.push('/search')}>
